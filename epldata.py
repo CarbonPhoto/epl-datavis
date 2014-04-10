@@ -1,21 +1,22 @@
-__author__ = 'SaleemSaddm'
+__author__ = 'elric-dev'
 
 import pprint
 import  matplotlib.pyplot as plt
 
 
+##Reading the file with the stats
 fileepl = open("epl_data.txt", "r")
-
 k = fileepl.readlines()
 
-
+##13 teams fo interest
 Teams = ["Arsenal", "Manchester City", "Manchester United", "Chelsea", "Tottenham Hotspur", "Everton", "Liverpool", "Newcastle United", "Leeds United", "Aston Villa", "Blackburn Rovers", "Nottingham Forest", "Norwich City" ]
 
-
+##Init data structs
 teamdict = {}
-
 years = []
 
+
+##Mining Data from the txt file.
 year = 0
 flag2 = 0
 for team in Teams:
@@ -44,11 +45,12 @@ for team in Teams:
     teamdict[team] = temp
     flag2 =1
 
+##note : to show the rankings properly, that is 1 should be higher than 2, substract the ranking from total teams plus 1. Since there are 23 spots including relegation, we substract all the ranks from 24. Making 1 23 and 2 22.. etc.
 
-
+##Number of Years
 ind = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
 
-
+#Axis Labels
 rankings = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "Relegated", ]
 rankings.reverse()
 
@@ -59,7 +61,7 @@ ax.set_yticks([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23])
 ax.set_xticklabels(years)
 ax.set_yticklabels(rankings, fontsize=20)
 
-#plt.grid(color='white', linestyle='-', linewidth=1)
+plt.grid(color='white', linestyle='-', linewidth=1)
 ax.set_ylim([0, 24.5])
 ax.set_xlim([0.5, 21.5])
 
@@ -104,13 +106,12 @@ p6 = plt.plot(ind, ranklist6, linewidth=20.0, color='#001d57', marker="o", marke
 
 ranklist13 = teamdict["Everton"]
 p13 = plt.plot(ind, ranklist13, linewidth=20.0, color='#00509c', marker="o", markersize = 25, markerfacecolor="#ffdd1c", markeredgewidth = 5, markeredgecolor = "#00509c")
-'''
 
 ips = [23,16,19,22,23,23,23,23,23,5,18,23,23,23,23,23,23,23,23,23,23]
 ips2 = [24-x for x in ips]
 p13 = plt.plot(ind, ips2, linewidth=20.0, color='#3a63a1', marker="o", markersize = 25, markerfacecolor="#de2c35", markeredgewidth = 5, markeredgecolor = "#3a63a1")
-
-
+'''
+#remove all the axes
 plt.tick_params(\
     axis='x',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -127,7 +128,9 @@ plt.tick_params(\
     labelleft='off') # labels along the bottom edge are off
 
 
-
+#set figure size
 fig.set_size_inches(40,10)
-plt.savefig("../../Desktop/fun/epl/ips.png",bbox_inches='tight', dpi = 96, pad_inches=0, transparent = True)
+
+#save fig
+plt.savefig("ips.png",bbox_inches='tight', dpi = 96, pad_inches=0, transparent = True)
 
